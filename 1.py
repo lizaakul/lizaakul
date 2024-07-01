@@ -17,7 +17,7 @@ def validate(name: str, age: int) -> None:
         raise Error('Ненужный пробел')
 
 
-def advice_about_passport(age: int, name: str):
+def advice_about_passport(age: int, name: str) -> str | None:
     """Приветствует пользователя и напоминает получить или сменить паспорт."""
     welcome = f'Привет {name}! Тебе {age}.'
     if age == 16 or age == 17:
@@ -26,8 +26,8 @@ def advice_about_passport(age: int, name: str):
         return f'{welcome}Не забудьте сменить паспорт'
     if age == 45 or age == 46:
         return f'{welcome}Не забудьте заменить паспорт во второй раз'
-    else:
-        print(welcome)
+
+    print(welcome)
 
 
 def cleaner(name: str) -> str:
