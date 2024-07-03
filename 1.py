@@ -34,6 +34,7 @@ def game() -> None:
 
 
 def main() -> None:
+    """Выполняет все прошлые функции"""
     timezone = pytz.timezone('Europe/Moscow')
     v = Validator()
     first_time = datetime.datetime.now(timezone)
@@ -59,7 +60,7 @@ def main() -> None:
         print(f"Время первой ошибки: {first_time.strftime("%H:%M:%S")}")
         print(f"Время последней ошибки: {last_time.strftime("%H:%M:%S")}")
         a = last_time - first_time
-        print(f'Прошло времени:{a}')
+        print(f'Прошло времени:{a}.')
     game()
 
 

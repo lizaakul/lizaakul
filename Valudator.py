@@ -27,7 +27,7 @@ class Validator:
     def _validate_name(self):
         name = self.data_history[-1].name
         if name == '':
-            raise ValidationError('Имя не может быть пустой строкой')
+            raise ValidationError('Имя не может быть пустой строкой.')
         if len(name) < 3:
             raise ValidationError('Минимальное количесвто символов в имени - 3')
         if '' in name.split(' '):
