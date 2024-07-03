@@ -29,7 +29,7 @@ class Validator:
         if name == '':
             raise ValidationError('Имя не может быть пустой строкой.')
         if len(name) < 3:
-            raise ValidationError('Минимальное количесвто символов в имени - 3')
+            raise ValidationError('Минимальное количесвто символов в имени - 3.')
         if '' in name.split(' '):
             raise ValidationError('Ненужный пробел')
 

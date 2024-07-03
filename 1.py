@@ -56,9 +56,9 @@ def main() -> None:
 
     print(advice_about_passport(data.age, data.name))
     if mistakes > 0:
-        print(f"Количество сделанных ошибок: {mistakes}")
-        print(f"Время первой ошибки: {first_time.strftime("%H:%M:%S")}")
-        print(f"Время последней ошибки: {last_time.strftime("%H:%M:%S")}")
+        print(f"Количество сделанных ошибок: {mistakes}.")
+        print(f"Время первой ошибки: {first_time.strftime("%H:%M:%S")}.")
+        print(f"Время последней ошибки: {last_time.strftime("%H:%M:%S")}.")
         a = last_time - first_time
         print(f'Прошло времени:{a}.')
     game()
