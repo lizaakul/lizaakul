@@ -1,20 +1,8 @@
-from error import Error
+import datetime
+import pytz
 import random
-
-
-def validate(name: str, age: int) -> None:
-    """Проверяет имя и возраст на оишбки."""
-    name = cleaner(name)
-    if age <= 0:
-        raise Error('Возраст не может быть отрицательным числом')
-    if age < 14:
-        raise Error('Минимальный возраст - 14')
-    if name == '':
-        raise Error('Имя не может быть пустой строкой')
-    if len(name) < 3:
-        raise Error('Минимальное количесвто символов в имени - 3')
-    if '' in name.split(' '):
-        raise Error('Ненужный пробел')
+from Valudator import Validator, DataWithDate
+from exceptions import ValidationError
 
 
 def advice_about_passport(age: int, name: str) -> str | None:
@@ -30,17 +18,12 @@ def advice_about_passport(age: int, name: str) -> str | None:
     print(welcome)
 
 
-def cleaner(name: str) -> str:
-    """Очищает имя от пробелов в начале и конце."""
-    return name.strip()
-
-
 def game() -> None:
     """Выбирает рандомное число, а пользователь его отгадывает"""
     number: int = random.randint(0, 10)
     while True:
         try:
-            num: int = int(input('Введите число:'))
+            num: int = int(input('* Введите число:'))
             if num != number:
                 print('Неверно. Попробуйте ещё раз(')
             else:
@@ -51,21 +34,34 @@ def game() -> None:
 
 
 def main() -> None:
-    """Совершаются все действия."""
+    timezone = pytz.timezone('Europe/Moscow')
+    v = Validator()
+    first_time = datetime.datetime.now(timezone)
+    mistakes: int = 0
     while True:
+        name = input('Введите имя: ')
+        age = int(input("Введите возраст: "))
+        data = DataWithDate(name, age)
         try:
-            name, age = input('Введите имя: '), int(input("Введите возраст: "))
-            validate(name, age)
+            v.validate(data)
+            last_time = datetime.datetime.now(timezone)
             break
-        except Error as e:
-            print(f"Ошибка: {e}")
+        except ValidationError as e:
+            mistakes += 1
+            print(f"!!Ошибка: {e}!!")
         except ValueError:
-            print('Возраст должен быть числом.')
+            mistakes += 1
+            print('!!Возраст должен быть ЧИСЛОМ!!')
 
-    print(advice_about_passport(age, name))
+    print(advice_about_passport(data.age, data.name))
+    if mistakes > 0:
+        print(f"Количество сделанных ошибок: {mistakes}")
+        print(f"Время первой ошибки: {first_time.strftime("%H:%M:%S")}")
+        print(f"Время последней ошибки: {last_time.strftime("%H:%M:%S")}")
+        a = last_time - first_time
+        print(f'Прошло времени:{a}')
     game()
 
 
 if __name__ == '__main__':
     main()
-
