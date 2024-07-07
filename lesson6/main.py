@@ -4,22 +4,24 @@ from AuthorizationError import AuthorizationError
 
 
 def main():
+    """Проверяет вас нужно зарегистрироваться или авторизоваться, приветсвует вас."""
     a = Authenticator()
     if a.login is None:
         print('Пройдите регистрацию.')
-        reg = False
+        reg: bool = False
     else:
         print("Введите логин и пароль для авторизации.")
-        reg = True
+        reg: bool = True
     while True:
-        login = input('Введите логин:')
-        password = input('Введите пароль:')
+        login: str = input('Введите логин:')
+        password: str = input('Введите пароль:')
         if not reg:
             try:
                 a.registrate(login, password)
-                reg = True
+                reg: bool = True
+                print('Вы успешно зарегестрировались. Теперь авторизуйтесь')
             except RegistrationError as e:
-                print(e)
+                return e
 
         else:
             try:
@@ -28,13 +30,13 @@ def main():
             except AuthorizationError as e:
                 print(e)
 
-    print(f'Добро пожаловать {login}.')
-    print(a.last_success_login_at)
-    print(a.errors_count)
+    print(f'Добро пожаловать {login}!')
+    print(f'Время регистрации:{a.last_success_login_at}')
+    print(f"Количество ошибок:{a.errors_count}")
 
 
 if __name__ == '__main__':
-    main()
+    print(main())
 
 
 
