@@ -30,7 +30,7 @@ class Authenticator:
             raise AuthorizationError("Пароль или логин не был найден.")
 
         if login == self.login and password == self.password:
-            print("Авторизация прошла успешно")
+            print("Авторизация прошла успешно.")
             self.last_success_login_at = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
             self.errors_count = 0
             self._update_auth_file()

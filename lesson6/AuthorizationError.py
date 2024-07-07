@@ -1,2 +1,2 @@
 class AuthorizationError(Exception):
-    """Класс ошибки"""
+    """Класс ошибки """

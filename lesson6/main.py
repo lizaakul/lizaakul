@@ -28,7 +28,7 @@ def main():
             except AuthorizationError as e:
                 print(e)
 
-    print(f'Добро пожаловать {login}')
+    print(f'Добро пожаловать {login}.')
     print(a.last_success_login_at)
     print(a.errors_count)
 
